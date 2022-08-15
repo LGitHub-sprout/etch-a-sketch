@@ -1,0 +1,47 @@
+/* etch-a-sketch.html */
+/* #etch-a-sketch h1 {
+  background-color: rgb(0, 112, 184);
+} */
+* {
+  box-sizing: border-box;
+}
+
+article.etch-a-sketch {
+  display: block;
+  margin: 0 auto;
+}
+
+.set-grid-size {
+  margin: 40px auto;
+  display: block;
+  text-align: center;
+}
+
+.sketch-container-wrapper {
+  /* content-box | border-box */ 
+  /* box-sizing: content-box; */
+  /* box-sizing: border-box; */
+  width: 500px;
+  height: 500px;
+  margin: 60px auto 0;
+  display: flex;
+  justify-content: center;
+  /* justify-content: flex-end; */
+  flex-wrap: wrap;
+  /* align-content: flex-start; */
+  /* align-content: flex-end; */
+  align-content: center;
+}
+
+.grid-square {
+  border: .25px solid black;
+  margin: 0;
+  padding: 0;
+  /* flex: 0 1 auto; */
+  /* flex: auto; */
+  flex: 1 1 auto;
+  /* background-color: red; */
+  /* background-color: white; */
+  /* background-color: rgba(0, 0, 0); */
+}
+

@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
+
+/* Test page? */
+	.em-test {
+		height: 200px;
+		border: solid 1px black;
+	}
+	.em-test-title {
+		font-size: 1em;
+	}
+	.pixel-test-title {
+		font-size: 16px;
+	}
+	.percentage-test-title {
+		font-size: 50%;
+	}
+
+/* Accessibility */
+	.screen-reader-text {
+		position: absolute !important;
+		clip: rect(1px,1px,1px,1px);
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+
+/* Reset Normalize */
+	html {
+		font-size: 100%; /* 16px */
+		overflow-x: hidden;
+	}
+	body {
+		font-family: 'Roboto', sans-serif;
+		overflow-x: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+	html,
+	body {
+		height: 100%;
+	}
+	dl {
+		margin: 0;
+	}
+	figure {
+		margin: 0;
+	}
+	.nav-list-toggle,
+	.nav-list__dropdown-list {
+		padding: 0;
+	}
+	img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+	}
+	label, input, button {
+		margin: .5em 0;
+	}
+	abbr {
+		text-decoration: underline dotted 15px;
+		text-underline-offset: .25em;
+	}
+	code {
+		background-color: linen;
+		padding: 2px;
+		border-radius: 2px;
+	}
+q {
+	font-style: italic;
+}
+
+/* Fonts based on minor third, bumped up one level for desktop. */
+	h1 {
+		font-family: 'Roboto Condensed', sans-serif;
+	}
+	h2 {
+		font-family: 'Roboto Condensed', sans-serif;
+		font-size: 1.728rem;
+	}
+	p {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+/* Mobile Styles */
+	/* Header */
+		#site-header {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 1.5em;
+			flex: 1 0 auto;
+		}
+		.site-title {
+			margin: 0 10px 0 0;
+			font-size: 2.5em;
+			/*margin: 1.75rem 0 1rem; desktop*/
+			line-height: 25px;
+		}
+		.site-title a {
+			text-decoration: none;
+			color: #c7c7c7;
+		}
+		.site-title span {
+			font-size: 20px;
+			text-transform: uppercase;
+			color: gray;
+		}
+	/* Main Nav */
+		.nav-list {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+		.main-nav {
+			position: relative;
+			width: 100%;
+			display: flex;
+			flex-direction: row-reverse;
+		}
+		label[for='menu-toggle'] {
+			display: flex;
+			justify-content: flex-end;
+		}
+		.main-nav li,
+		.contact-list {
+			list-style: none;
+			text-transform: uppercase;
+			font-size: 1em;
+			margin: .5rem;
+			padding: 1rem;
+			display: block;
+		}
+		.main-nav li:first-child {
+			margin-left: 0;
+		}
+		.main-nav li:last-child {
+			margin-right: 0;
+		}
+		.nav-list__item--nested-list {
+			background-color: linen;
+		}
+		.nav-list__item--nested-list li:last-child {
+			padding-top: 0;
+		}
+		.main-nav li a {
+			text-decoration: none;
+			padding: .5rem .5rem 1rem 0;
+		}
+
+	/* Dropdown nav */
+		.nav-list-toggle li ul {
+			visibility: hidden;
+			position: absolute;
+			opacity: 0;
+			transition: all .5s ease;
+			display: none;
+		}
+		.nav-list-toggle li:hover > ul,
+		.nav-list-toggle li:hover {
+			visibility: visible;
+			opacity: 1;
+			display: block;
+			/* background-color: white; */
+			z-index: 100;
+		}
+		ul li ul li {
+			padding: .5em 0;
+			width: 100%;
+		}
+		.nav-list__dropdown-list li {
+			margin-left: 0;
+		}
+		.nav-list-toggle {
+			margin-top: 60px; 
+			margin-bottom: 0;
+			height: 0px;
+			overflow: hidden;
+			transition: height .2s ease-out;
+			z-index: 10;
+		}
+		.nav-list-toggle li {
+			margin: 0;
+			padding-left: .5em;
+		}
+		.nav-list-toggle li ul {
+			padding-left: .75em;
+		}
+		span.menu-toggle {
+			text-align: center;
+			display: block;
+			font-size: 1em;
+			text-transform: uppercase;
+			cursor: pointer;
+		}
+		#menu-toggle {
+			position: absolute;
+			height: 0;
+			opacity: 0;
+		}
+		#menu-toggle:checked + .nav-list-toggle {
+			height: 75%;
+			border-left: solid 1px black;
+		}
+
+	/* Main article */
+		.post-wrapper {
+			margin: 2em 0;
+		}
+		.main-portrait img {
+			max-width: 85vw;
+			margin: 0 auto;
+		}
+		.article-body-wrap p {
+			margin: .5em 0;
+		}
+		.article-body-wrap h2 {
+			margin: 1em 0;
+			text-align: center;
+		}
+		.main-title span {
+			white-space: nowrap;
+		}
+
+/* Desktop */
+	@media screen and (min-width: 600px) {
+		.article-body-wrap h2 {
+			text-align: center;
+			margin: 1em 0 .75em 0;
+			color: inherit;
+		}
+		.post-wrapper {
+			display: flex;
+			margin: 2em 0;
+		}
+		.article-body-wrap {
+			display: flex;
+			flex-direction: column;
+			padding: 0 2em 0;
+		}
+		.main-portrait img {
+				max-width: 100%;
+				margin: 0 auto;
+		}
+	}
+	@media screen and (min-width: 640px) {
+		#menu-toggle:checked + .nav-list-toggle {
+			border-left: none;
+		}
+		.nav-list-toggle {
+			width: 100%;
+			margin-top: 0;
+			padding-top: 0;
+			display: flex;
+			justify-content: center;
+			margin-left: 0;
+		}
+	}
+
+	.page-wrap {
+		/*min-height: 100vh;*/
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		flex: 1 0 auto;
+	}
+	.container {
+		width: 90%;
+		max-width: 1024px;
+		margin: 0 auto;
+	}
+	#main-content {
+		flex: 1 0 auto;
+	}
+	.main-content {
+		position: relative;
+		margin-top: 9em;
+	}
+	.main-content::before {
+		content: 'Welcome!';
+		font-size: 4em;
+		color: red;
+		font-family: 'Kaushan Script', cursive;
+		position: absolute;
+		transform: rotate(-11.5deg); /* translate(0, 10%);*/
+		opacity: 50%;
+		margin: -130px 5%;
+		padding-right: 25px;
+		z-index: -10;
+	}
+
+	h1.main-title {
+		font-size: 2.150rem;
+		margin: 0;
+		line-height: 1.2em;
+		text-align: center;
+	}
+	.tagline {
+		font-size: 16px;
+		text-align: center;
+		line-height: 1.5em;
+		/*margin: -16px 0 32px 0;*/
+		margin: 1em 0;
+	}
+
+	/* Anchor Links */
+		a {
+			color: #42A5F5; /* blue */
+		}
+		a:hover {
+			color: #a41b5f; /* red */
+		}
+		
+
+	/* Site Footer */
+	.colophon {
+		margin-top: 2rem;
+		background-color: rgba(255, 0, 0, .5); /* #42A5F5 blue or 255, 0, 0, .5)*/
+		padding: 20px 0;
+	}
+	.home-contact-list {
+		list-style: none;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin: 0;
+		padding: 0;
+	}
+	.home-contact-list li {
+		padding: 15px 25px;
+	}
+	.copyright {
+		text-align: center;
+		margin-top: 0;
+	}
+	.copyright a,
+	.contact-list__item a {
+		color: #996666;
+	}
+	.content-info__blog {
+		white-space: nowrap;
+		text-align: center;
+		margin-bottom: 0;
+	}
+	.content-info__blog a {
+		color: #e8e8e8;
+	}
+
+/* University Ltr footer? */
+address .contact-street,
+address .contact-phone {
+	margin: 1em 0;
+}
+address a {
+	display: block;
+	line-height: .5em;
+}
+.top-of-site-link {
+	position: sticky;
+	bottom: 1.5em;
+	margin-right: -20px;
+	float: right;
+}
+.copyright span {
+	margin-top: 4em;
+	text-transform: uppercase;
+}
+
+
