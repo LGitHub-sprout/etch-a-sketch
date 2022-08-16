@@ -39,7 +39,7 @@
   <meta name="twitter:site" content="@self_teach_dev">
   <meta name="pinterest" content="nopin">
 
-  <title>Lester Carpenter's Odin Project JS Curriculum | Etch-a-Sketch</title>
+  <title>Lester Carpenter's Odin Project JS Curriculum | Etch-a-Sketch v. 2</title>
   <script type="application/ld+json">
 			{
 				"@context"	: "https://schema.org",
@@ -53,205 +53,27 @@
 
 <body class="home etch-a-sketch">
   <div class="page-wrap">
-    <header id="site-header" class="etch-a-sketch container">
-      <a id="skip-nav" class="skip-to-content screen-reader-text" href="#main-content">Skip to main content</a>
-      <nav class="main-nav">
-        <label for="menu-toggle"><span class="menu-toggle">menu</span></label>
-        <input type="checkbox" id="menu-toggle">
-
-        <ul class="nav-list-toggle">
-          <li class="nav-list__item"><a href="#">mdn</a>
-            <ul class="nav-list__item--nested-list">
-              <li class="nav-list__dropdown-item"><a href="../mdn/mdn-html.html">html</a></li>
-              <li class="nav-list__dropdown-item"><a href="../mdn/mdn-js.html">JavaScript</a></li>
-            </ul>
-          <li class="nav-list__item"><a href="#">Odin Project</a>
-            <ul class="nav-list__item--nested-list">
-              <li class="nav-list__dropdown-item"><a href="../odin-project/flexbox-landing-page.html">Flexbox Landing Page</a></li>
-              <li class="nav-list__dropdown-item"><a href="../odin-project/fizzbuzz.html">FizzBuzz App</a></li>
-              <li class="nav-list__dropdown-item"><a href="../odin-project/drumkit.html">Drum Kit</a></li>
-              <li class="nav-list__dropdown-item"><a href="../odin-project/rps.html">Rock Paper Scissors</a></li>
-              <li class="nav-list__dropdown-item"><a href="../odin-project/etch-a-sketch.html">Etch-a-Sketch</a></li>
-            </ul>
-          </li>
-          <li class="nav-list__item"><a href="../about-lester.html">about</a></li>
-        </ul>
-      </nav>
-    </header>
-
     <main id="main-content" class="container">
       <article id="etch-a-sketch">
-
-        <h1 class="main-title">Etch-a-Sketch</h1>
-        <button class="set-grid-size" type="button" name="test">Set Grid Size</button>
-
-        <div class="sketch-container-wrapper">
-        </div> <!-- .sketch-container -->
-
         <div class="post-wrapper">
           <div class="article-body-wrap etch-a-sketch">
-            <h2>Pre-planning the Etch-a-Sketch Controls</h2>
-            <p>Based on <a href="https://dev.to/parenttobias/pre-planning-your-project-4fd5">Toby Parent's</a> article (specification located <a href="https://www.theodinproject.com/lessons/foundations-etch-a-sketch#assignment">here</a>).</p>
+
+            <h1 class="main-title">Etch-a-Sketch v. 2</h1>
+            <button class="set-grid-size" type="button" name="test">Set Grid Size</button>
+    
+            <div class="wrapper">
+              <div class="sketch-container-wrapper">
+              </div> <!-- .sketch-container -->
+            </div>
             
-            <h3>The Interface Specification</h3>
-            <dl>
-              <dt>Button</dt>
-              <dd>A button that sends the user a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt">prompt</a> asking for the number of squares per side for the new grid.</dd>
-              <dd>Removes existing grid and adds a new grid in same total space (container remains static size/width).</dd>
-              <dd>Limit the grid size user inputs to prevent screen freeze/browser crash.</dd>
-              
-              <dt>Hover Effect</dt>
-              <dd>The grid divs should change color when the mouse passes over them, leaving a pixelated-looking trail through the grid, resembling more a light bright toy than etch-a-sketch.</dd>
-              <dd><strong>Hint</strong>: Look at the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event">mouseover</a> link for info on the event that occurs when a mouse enters (the boundaries of) an element for more info about hover events as well as others.</dd>
-              <dd>Changing the color of the divs can be done by adding classes or using <abbr title="JavaScript">JS</abbr> to change the background.</dd>
-            </dl>
-            
-            <h2>Adding 10 Percent Black Until Completely Black</h2>
-            <p>It's all working now. Since I decided to use a function to calculate the random colors and save them to an array I needed to initialize new variables for the 10% black of each one. I realized that simply calling the array indices for each color wasn't working in the  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">template string</a>.</p>
-            <p>Ok, I have the random RGB background color working. I also have a second event outside the loop but in the <code>calcGrid()</code> function which changes the background color but the calculate 10% darker is wrong. My idea is to get that expression correct and then implement it on the event handler.</p>
-            
-            <ul>
-              <li>I need a variable that incrementally adds 10% black to the <code>rgb()</code> property that sets the grid background color.</li>
-              <li>The first pass should be the initial color value and successive passes should add 10% black.</li>
-            </ul>
+            <div>
+              <p>Create a grid of squares, based on user input but with a default of 16, which are displayed inside a square container.</p>
+              <ul>
+                <li>Take a saved reference of the user input and use it as the factor by which the grid is created (loop), meaning if the user inputs 7 the grid should have 49 squares total.</li>
+                <li>Let <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox#nested_flex_boxes"><code>flexbox</code></a> instead of <abbr title="JavaScript">JS</abbr> calculate the size of each individual grid square.</li>
+              </ul>
+            </div>
 
-            <h3>Just Try Something</h3>
-
-            <ul>
-              <li>Then I need to subtract another 10% until it's black &mdash; 10 times in other words.</li>
-              <li>Not sure how I could do a calculation 'in place'; however, I could try dividing the initial value by 10 and then subtract that amount on each mouseover.</li>
-              <li>I need to take the original values for red, green, and blue and divide them by 10 to get 10% of each random color.</li>
-            </ul>
-           
-            <p>The only thing I know to do at this point is log the initial random numbers and see if they change on successive mouseovers over the grid.</p>
-            <p>Setting each color to a simple expression that calculates a random value is easiest and shortest code. Since I don't need successive <em>color</em> changes a function appears to be a little overkill, if not (always) good practice.</p>
-            <p>I need three variables, each with a different random number. I don't necessarily need a function but I discovered that it helps to calculate new values for red green blue which may or may not be helpful since I only need one random number for each color and then 10% black until 100% black. </p>
-            <p>How would a function create this? It seems like a loop is the way to go. Create a loop that saves a random number to each of my three variables: red, green, and blue.</p>
-            <ul>
-              <li>Reuse the initial red green blue values and add 10% black to each in a new event listener after using the <code>once</code> option for the initial one.</li>
-              <li>Set the random color <em>once</em> then use a reference to those colors to add 10% black on each successive mouseover until it's 100% black.</li>
-              <li>Create Red Blue Green variables</li>
-            </ul>
-            <p>Could I add a class to the <span class="variable">gridSquare</span> that overrides the initial color and adds 10% black? Yes, that works, but I'm still stuck trying to figure out how to </p>
-            <p>Before I start searching for how to do this, I want to try to conceive of how it will work.</p>
-            <p>I'm at the final specification and thinking to init a variable for the <a href="https://en.wikipedia.org/wiki/RGBA_color_model"><abbr title="Red Green Blue Alpha Channel">RGBa</abbr></a> alpha channel which I can then (hopefully) easily increment in my function.</p>
-
-            <!-- left off here -->
-
-            <h3>Problems So Far&hellip;</h3>
-            <ul>
-              <li>It isn't as straightforward as adding an alpha (opacity) channel to random numbers as this only lightens or darkens the color insteading of adding black.</li>
-              <li>Here's a potentially helpful <a href="https://stackoverflow.com/questions/29232073/less-css-adding-a-percentage-to-a-hex-color-how-does-this-work#29233126">Stack Overflow</a> post on converting RGB to hexcode color. Not exactly sure how to implement it though.</li>
-              <li>I could conceivably have two events for the <span class="variable">gridSquare</span>, one for the initial color and one for adding 10% until solid black <a href="https://stackoverflow.com/questions/8318591/javascript-addeventlistener-using-to-create-a-mouseover-effect#8318629">like this</a>.</li>
-              <li>David Walsh's creating <a href="https://davidwalsh.name/convert-html-stings-dom-nodes">DocumentFragment</a> as a way to refactor current code as suggested by Toby Parent.</li>
-              <li>I supposed I could remove the event listener but all my ideas seem so sophmoric and kinda pointless. Unless I find a way to implement it decently, won't it just seem hacky and look like a beginner?</li>
-            </ul>
-            
-            <h2>Thinking About Hover Effects</h2>
-            <p>I only have access to all the gridSquares inside the <code>for</code> loop. Therefore, in the loop, set all the different classes needed to change the grid colors on mouseover event. Then somehow toggle, add, or remove them when buttons are clicked? Is it as simple as using conditionals?</p>
-            <p>I also think I have a scoping problem because I can't access ALL gridSquares anywhere other than inside the LOOP. What matters is that I have access to ALL the gridSquares which means working inside the <code>for</code> loop. If <span class="variable">gridSquare</span> doesn't have a 'rainbow' class attribute, add it (and possibly remove or otherwise toggle OFF all other classes)?</p>
-            <p>Change the hover color to a random <abbr title="Red Green Blue... not Ruth Ginsburg Bader">RGB</abbr> value. So for this I need to use the template string (backticks) and interpolate the values into the style property (I think).</p>
-
-            <h3>A New Random Color For Each Pass Over The gridSquare</h3>
-            <p>I have random background colors for 'mouseover' working on the gridSquares; however, it's not changing successively meaning the color is set once and never changes again after successive mouseovers.</p>
-            <p>Just off the top of my head, the first couple solutions that come to mind are </p>
-            <ol>
-              <li>using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty"><code>setProperty()</code></a> method of the </li>
-              <li><code>setAttribute()</code> method</li>
-              <li>using the <code>mouseleave</code> property.</li>
-              <li>using toggle.</li>
-            </ol>
-            <p>This is the closest I've gotten to <a href="https://stackoverflow.com/questions/58148188/random-color-on-mouse-hover">a solution</a> that seems to fit my scenario.</li>
-            <p>None of which I intuitively feel are correct, for some odd reason, but won't let that keep me from investigating further. So I'm feeling a bit defeated tbo. The other idea I'm having is to see if <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> options might help, although I don't recall it being so. </p>
-            <p>I wonder if I use a function to set the red green blue values and as a <a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function">callback function</a> on the mouse event it would calculate new values each time the event is fired and change the background color on successive passes.</p>
-
-            <p>Would using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute">setAttribute</a>, since it updates values that already exist, in a function that calculates and returns the RGB values work?</p>
-            <p>A test function that calculates the red, green, blue values for the background color and used as an element's callback function on 'mouseenter' does return different values for each pass over the element; therefore, I'm <em>hopeful</em> this is the solution to my problem of getting new background colors on the <span class="variable">gridSquares</span> for each pass over them. </p>
-            <p>And yes, indeed, it was the solution.</p>
-            <p>See below links on document fragments to learn how to refactor the code. Wondering if I could add all the classes for the control buttons and then use conditionals to implement their use.</p>
-            
-            <h2>Button Prompt</h2>
-            <ul>
-              <li>Create <abbr title="Hypertext Markup Language">HTML</abbr> button.</li>
-              <li>Select prompt button and add an event listener that prompts user for grid size preference.</li>
-              <li>Might be fun to set the initial grid size to a rando number for Vuh-rhy-uh-tay, lol.</li>
-            </ul>
-            <dl>
-              <dt>Set Grid Size button</dt>
-              <dd>The <code>calcGrid()</code> function sets the initial grid size on page load.</dd>
-              <dd>Now I need to add functionality that sets the grid size with the Set Grid Size button <em>if</em> that's been set.</dd>
-              <dd>Seems like <code>calcGrid()</code> needs a default squaresPerSize value with conditionals to override it if desired.</dd>
-              <dd>Try using ternary logic. I think I need to rename my variables and add one for user choice of grid size.</dd>
-              <dd>Do I attach the button event listener to <code>calcGrid()</code> function or do I set the listener as a function?</dd>
-              <dd>Not sure how I connect the user choice with the <code>calcGrid()</code> function—I just added it to the function and will add conditionals.</dd>
-              <dd>If there's a <code>userChoice</code> then set <code>squaresPerSide</code> to that, otherwise use default.</dd>
-              <dd>I don't want the prompt in the <code>calcGrid()</code> function because it will always call the prompt on page load. I want the grid to be set on page load and for the prompt to be called when the button is clicked. Then I want the <code>userChoice</code> to be saved into the squaresPerSide variable. </dd>
-              <dd>I put the conditional resetting <code>squaresPerSide</code> to <code>userChoice</code> in the <code>calcGrid()</code>.</dd>
-              <dd><code>calcGrid()</code> is being run on page load and setting <code>squaresPerSide</code>. <code>userChoice</code> is <code>undefined</code>; so what is that telling me and how can I fix it?</dd>
-              <dd>Adding an <code>if</code> statement set the default grid size to 16 by 16 if there's no user choice.</dd>
-              <dd>I called <code>calcGrid()</code> inside the event listener which correctly changes the grid dimensions (confirmed by logging to console) but doesn't update the <abbr title="Document Object Model">DOM</abbr>.</dd>
-              <dd>Time to google DOM stuff, I guess.</dd>
-            </dl>
-            <p>The set grid size button is working; however, it's creating a new grid directly beneath the first one instead of replacing the original like the spec says to do.</p>
-            <dl>
-              <dt>Possible Fixes</dt>
-              <dd>Get a reference to the original grid selector, <code>.sketch-container</code> and somehow append or replace it with the new grid params?</dd>
-              <dd>Is there any way to separate the <code>calcGrid</code> function into reusable parts, like one part to create and one part to append? I don't think so? Everything seems either necessary to building the grid or wouldn't help by moving to either global scope or to other function. I wouldn't make the <code>.sketchContainer</code> dynamic because I'm trying to <em>replace</em> it, so IDT having access to a new one makes sense.</dd>
-              <dd>I don't see how to rework the <code>calcGrid()</code> function and think I need to write something that deals with removing or adding or whatevers like this <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/replaceChild">Node.replaceChild</a>. </dd>
-              <dd>I could try to put the <code>for</code> loop in a separate function and reuse that for the <code>userChoice</code> button but wonder if I'd then have to use more node stuff. I will look at that next.</dd>
-              <dd>It was confirmed yesterday on the <abbr title="The Odin Project">TOP</abbr> <a href="https://discord.com/">Discord</a> server that I indeed need to look into using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">Node</a> Web API interface in order to get a new grid to overwrite or replace the currently existing one.</dd>
-            </dl>
-
-
-            <h2>Pseudocode For Replacing Default Grid</h2>
-            <ul>
-              <li>I already have a conditional, inside the <code>calcGrid</code> function, for the userChoice variable which creates the requested grid but adds it to the end of the existing one instead of replacing it.</li>
-              <li>I need to call <code>replaceChild()</code> or similar to put new grid in existing grid's position and assume this is the last step and therefore goes at the end of the <code>for</code>loop.</li>
-              <li>I will still need to append each gridSquare to the sketchContainer, as that functionality currently works well, so that will stay.</li>
-              <li>So <em>after</em> I append all the gridSquares I will run the replaceChild; however, I'll need a new sketchContainer to replace the old one with.
-                <ul>
-                  <li>I think I should initialize the new sketchContainer in the global scope.</li>
-                </ul>
-              </li>
-              <li>I believe it will also need global scope, and I can always change that later if necessary.</li>
-              <li>I <em>think</em> I can find a way to access parent and child nodes in order to replace the default grid with the new user one:
-                <ul>
-                  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">Node</a> Web API</li>
-                  <li><code>firstChild</code></li>
-                  <li><code>lastChild</code></li>
-                  <li><code>parentElement</code></li>
-                  <li><code>parentNode</code></li>
-                </ul>
-              </li>
-              <li>I have to figure out how I'm going to select the <span class="variable">sketchContainer</span> since it's the third child of it's parent. Once selected, I don't want to delete the container since the loop creates and appends the <span class="variable">gridSquares</span> to it.</li>
-              <li><strong>Problem</strong>: I can't seem to select the container's <span class="variable">gridSquares</span> in order to delete them since (I believe) there are more than one, meaning it'll be some kind of list or collection which would require a loop. I can certainly loop but am wondering if just creating the container in the loop and then deleting it when there's a new <span class="variable">userChoice</span> grid size would be not only easier but more performant. Still a newbie but to me that kinda makes sense.</li>
-              <li><strong>Solution:</strong> I ended up removing the previous <span class="variable">sketchContainer</span> first, after confirming that the user had submitted a valid input. I used the  Element Web API <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/remove">remove()</a> method after wrapping the container in a wrapper div element.</li>
-            </ul>
-
-            <h2>Problems So Far</h2>
-            <p>Having trouble with what I'm guessing is a rounding error. My loop is working and the height/width is calculated correctly; however, there are barely perceptible gaps in the grid with a certain number of grid cells and columns. I've tried <em>as many</em> easy/common solutions as I can think of to no avail. I was thinking that perhaps a percentage width and/or height might fix the problem and found <a href="https://luc1100.github.io/odin-etch-a-sketch/">this</a> solution that uses <code>flex: 0 0 %</code> in what appears to be a single loop, so I'll try doing that before turning to the nested loop route.</p>
-            <p>The Odin server folks suggested this is probably as <abbr title="Cascading Style Sheets">CSS</abbr> problem, and I was able to get rid of the gaps inside the grid but there's still a couple nearly imperceptible gaps at the edges now. I'll circle back and address those. For now I have to move on after spending a lot of time nitpicking that detail.</p>
-
-            <ul>
-              <li><a href="https://andrewjh271.github.io/etch-a-sketch/">Example Etch-a-Sketch</a></li>
-              <li><a target="_blank" href="https://mooniidev.github.io/etch-a-sketch-toy/">Example Etch-a-Sketches</a></li>
-              <li><a target="_blank" href="https://tylphe.github.io/etchASketch/">Example Etch-a-Sketches</a></li>
-              <li><a target="_blank" href="https://rlmoser99.github.io/etch-a-sketch/">Example Etch-a-Sketches</a></li>
-              <li><a target="_blank" href="https://michalosman.github.io/etch-a-sketch/">Example Etch-a-Sketches</a></li>
-              <li><a target="_blank" href="https://bscottnz.github.io/esketch/">Example Etch-a-Sketches</a></li>
-              <li><a target="_blank" href="https://angieaugy.github.io/etch-a-sketch/">Example Etch-a-Sketches</a></li>
-              <li><a target="_blank" href="https://codepen.io/ccolds/pen/YzarXRp/">Example Etch-a-Sketches</a></li>
-              <li>Interesting <code>canvas</code> element solution <a href="https://stackoverflow.com/questions/32676627/javascript-loop-to-create-grid-on-canvas#32676689">stackoverflow solution</a>.</li>
-              <li><a href="https://www.tabnine.com/academy/javascript/how-to-change-css-javascript/">Changing CSS Properties</a></li>
-              <li><a href="https://css-tricks.com/updating-a-css-variable-with-javascript/">Updating CSS w JS</a></li>
-              <li>Using <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information#using_the_setattribute_method">dynamic Styling</a></li>
-              <li><a href="https://stackoverflow.com/questions/28627606/does-adding-too-many-event-listeners-affect-performance#28627965">S.O. events handlers performance thread</a></li>
-              <li><a href="https://www.javascripttutorial.net/javascript-dom/javascript-mouse-events/">Detecting mouse buttons</a></li>
-              <li><a href="https://somethinghitme.com/">interesting site</a></li>
-              <li>MDN's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment">createDocumentFragment()</a> method</li>
-              <li><a href="https://stackoverflow.com/questions/17264182/javascript-efficiently-insert-multiple-html-elements">S.O.</a>  on creating elements in a loop</li>
-              <li><a href="https://stackoverflow.com/questions/3117756/javascript-create-element-and-set-attributes">S.O.</a> create element and set attributes. Only worked with ID for me.</li>
-            </ul>
           </div><!-- .article-body-wrap .etch-a-sketch -->
         </div><!-- .post-wrapper -->
       </article>
