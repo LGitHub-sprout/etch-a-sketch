@@ -1,21 +1,34 @@
 
-const sketchContainerWrap = document.querySelector('.sketch-container-wrapper');
+const wrapper = document.querySelector('.wrapper');
 const gridSizeBtn = document.querySelector('.set-grid-size');
+const sketchContainerWrap = document.querySelector('.sketch-container-wrapper');
 
-const gridFrag = new DocumentFragment();
-
-for (let c = 0; c < 100; c++) {
-  const gridRow = document.createElement('div');
-  gridRow.classList.add('grid-row');
-  sketchContainerWrap.appendChild(gridFrag);
-  gridFrag.appendChild(gridRow);
-
-  let r = 1;
-  while (r < 100) {
-    const gridSquare = document.createElement('div');
-    gridSquare.classList.add('grid-square');
-    gridRow.appendChild(gridSquare);
-    
-    r++;
-  }
+const createElements = (element, className, appendTo) => {
+  const el = document.createElement(element);
+  el.classList.add(className);
+  appendTo.appendChild(el);
+  
+  return el;
 }
+
+(function () {
+  for (let r = 0; r < 28; r++) {
+    const gridRow = createElements('div', 'grid-row', sketchContainerWrap);
+    // console.log(sketchContainerWrap.children); // HTMLCollection
+    for (let s = 0; s < 28; s++) {
+      createElements('div', 'grid-square', gridRow);
+    }
+  }
+})();
+
+// const assembleGrid = () => {
+//   for (let r = 0; r < 7; r++) {
+//     const gridRow = createElements('div', 'grid-row', sketchContainerWrap);
+//     // console.log(sketchContainerWrap.children); // HTMLCollection
+//     for (let s = 0; s < 7; s++) {
+//       createElements('div', 'grid-square', gridRow);
+//     }
+//   }
+// }
+// assembleGrid();
+
