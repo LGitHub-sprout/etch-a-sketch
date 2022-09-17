@@ -4,11 +4,25 @@ const sketchContainerWrap = document.querySelector('.sketch-container-wrapper');
 let userGrid; 
 
 const getUserGrid = () => {
-  return prompt('Enter a grid size');
+  return prompt('Enter a grid size 100 or LOWER.');
 }
 
 const getGridControls = function () {
   userGrid = getUserGrid();
+  if (userGrid > 100) {
+    alert('Please enter a valid grid size (100 or LESS).');
+    return;
+  } else if (userGrid === null) {
+    alert('Have another go, mate!');
+    return;
+  } else if (isNaN(userGrid)) {
+    alert('Please enter only numbers.');
+    return;
+    // https://stackoverflow.com/questions/10232366/how-to-check-if-a-variable-is-null-or-empty-string-or-all-whitespace-in-javascri
+  } else if (userGrid.match(/^ *$/) !== null) {
+    alert('No spaces allowed.');
+    return
+  }
   deleteGrid();
   assembleGrid(userGrid);
 }
@@ -36,8 +50,8 @@ const assembleGrid = (defaultGrid) => {
 }
 assembleGrid(16);
 
-// I'm not opposed to func expressions; I simply prefer to hoist which I think better organizes the code.
-// createElements() posted by Learner on TOP who I forgot to cite.
+// I'm not opposed to func expressions. Sometimes hoisting better organizes the code.
+// createElements() posted by Learner on TOP whom I forgot to cite.
 function createElements(element, className, appendTo) {
   const el = document.createElement(element);
   el.classList.add(className);
@@ -53,70 +67,34 @@ function deleteGrid() {
     sketchContainerWrap.removeChild(sketchContainerWrap.lastElementChild);
   }
 }
-// setBgBlack();
-// Event Delegation
+
 function setBgBlack() {
   sketchContainerWrap.addEventListener('mouseover', (e) => {
     if (e.target.className === 'grid-square') e.target.classList.add('black');
   });
 }
 
-// Shown by Toby @TOP and recoded by hand after studing it's contents:
-// currying, callbacks, destructuring 
-// Generate a random number btwn the range 0-255
+// Introduced by Toby @TOP and recoded by hand after studing it's contents:
+  // currying, callbacks, destructuring 
 const calcRandomNum = (min, max) => // {
   () => {
-    // not sure but I think there was another set of parens here — the curried bit
     return Math.floor(Math.random() * (max - min));
   };
   getRandomNum = calcRandomNum(0, 255);
   
-  const makeRandomColors = () => {
-    let arr = [...Array(3)].map(getRandomNum);
+const makeRandomColors = () => {
+  let arr = [...Array(3)].map(getRandomNum);
 
-    return arr;
-  }
-  
+  return arr;
+}
+
+// dataset https://www.youtube.com/watch?v=On_WyUB1gOk 
+// https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues 
 function setRandomBg(e) {
   const [red, green, blue] = makeRandomColors();
-  
+
   if (e.target.className = 'grid-square') {
     e.target.style.setProperty('--rainbow-BgColor', `rgb(${red}, ${green}, ${blue})`);
-    
-    // if (! e.target.classList.contains('darken')) {
-    //   console.log('poop')
-    //   e.target.style.setProperty('background-color', 'black')
-    // }
-    
-    // if (e.type) {
-      // console.log(window.getComputedStyle(e.target))
-      const targetStyles = window.getComputedStyle(e.target);
-      // e.target.setAttribute('class', 'grid-square rainbow')
-      // if (e.target.classList.contains('poop')) {
-        // console.log('there is a poop class')
-        // console.log('background-color', targetStyles.getPropertyValue('background-color'), typeof targetStyles.getPropertyValue('background-color'));
-        // if (targetStyles.getPropertyValue('background-color')) {
-          // e.target.style.setProperty('--rainbow-BgColor', `rgb(0 0 0)`);
-          // }
-          
-          // console.log('target background-color', targetStyles.getPropertyValue('background-color'))
-          // console.log(targetStyles)
-        } // end if
-        // darken(e);
-        // if (e.target.hasAttribute('style')) console.log('poop');
-        // console.log(e.target.getAttribute('style'))
-        // console.log(e.target.style, typeof e.target.style)
-        // console.log(window.getComputedStyle(e.target, null))
-        // console.log('the event type', e.type)
-        // console.log('target classList contains "grid-square" true or false', e.target.classList.contains('grid-square'))
-        // console.log('target attributess', e.target.attributes)
-          
-          sketchContainerWrap.removeEventListener('mouseover', setRandomBg);
-    }
-sketchContainerWrap.addEventListener('mouseover', setRandomBg);
-          
-function darken(e) {
-  e.target.style.setProperty('background-color', 'black');
+  }
 }
-          
-          
+sketchContainerWrap.addEventListener('mouseover', setRandomBg);
