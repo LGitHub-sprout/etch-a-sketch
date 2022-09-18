@@ -35,7 +35,9 @@ const assembleGrid = (defaultGrid) => {
       gridRow = createElements('div', 'grid-row', sketchContainerWrap);
       
       for (let s = 0; s < defaultGrid; s++) {
-        createElements('div', 'grid-square', gridRow);
+        createElements('div', 'grid-square', gridRow).classList.add('data-');
+        gridRow.firstElementChild.classList.add('data')
+
       }
     }
   } else {
@@ -43,9 +45,11 @@ const assembleGrid = (defaultGrid) => {
       userRow = createElements('div', 'user-row', sketchContainerWrap);
       
       for (let s = 0; s < defaultGrid; s++) {
-        createElements('div', 'grid-square', userRow);
+        createElements('div', 'grid-square', userRow).classList.add('data-');
+        userRow.firstElementChild.classList.add('data')
+
       }
-    }   
+    }
   } 
 }
 assembleGrid(16);
@@ -88,13 +92,62 @@ const makeRandomColors = () => {
   return arr;
 }
 
+// console.log(document.styleSheets[4].cssRules[0].style);
+// const cssDeclaration = document.styleSheets[4].cssRules[0].style;
+// console.log(typeof cssDeclaration.getPropertyValue('--rainbow-BgColor'), cssDeclaration.getPropertyValue('--rainbow-BgColor'))
+
+let targetLen;
 // dataset https://www.youtube.com/watch?v=On_WyUB1gOk 
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues 
 function setRandomBg(e) {
   const [red, green, blue] = makeRandomColors();
+  // console.log(typeof [red, green, blue], [red, green, blue], Array.isArray([red, green, blue])); // array
+  // console.log('red', red)
+  // const rgbRed = red;
+  // console.log('rgbRed', rgbRed)
 
-  if (e.target.className = 'grid-square') {
+  targetLen = e.target.style.length;
+  // console.log('targetLen inside function', targetLen) // 0 but gets thrown away?
+
+  if (targetLen === 0) {
     e.target.style.setProperty('--rainbow-BgColor', `rgb(${red}, ${green}, ${blue})`);
+
+    computedStyle = window.getComputedStyle(e.target);
+    // console.log(computedStyle.getPropertyValue('background-color'))
+    computedStyleValue = computedStyle.getPropertyValue('background-color');
+    console.log('first mouseover', computedStyleValue)
+
+
+
+    // const cssDeclaration = document.styleSheets[4].cssRules[0].style;
+    // const bgColor = cssDeclaration.getPropertyValue('--rainbow-BgColor');
+    // console.log(e.target.style)
+    // console.log(bgColor)
+
+    // console.log(red)
+  }
+  if (targetLen === 1) {
+    console.log('second mouseover', computedStyleValue)
+
+    // console.log('red', red)
+    // console.log('rgbRed', rgbRed)
+    // console.log(rgbRed)
+    // console.log('targetLen is', targetLen)
+    e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
   }
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
+
+sketchContainerWrap.addEventListener('mouseover', (e) => {
+  // [red, green, blue] = makeRandomColors();
+
+  // console.log(red)
+
+  if (e.target.style.length === 1) {
+    // console.log('target len:', targetLength)
+    // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
+
+    // subtract .10 from red, green, blue and reset the style property color
+    // e.target.style.setProperty('--rainbow-Bg-color', `rgb(0, 0, 0)`)
+  }
+})
