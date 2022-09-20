@@ -91,63 +91,63 @@ const makeRandomColors = () => {
 
   return arr;
 }
+// pattern, replacement
+// const num = 222;
+// const pattern = ! Number.isNaN(num);
+// console.log('true or false', pattern)
 
 // console.log(document.styleSheets[4].cssRules[0].style);
 // const cssDeclaration = document.styleSheets[4].cssRules[0].style;
 // console.log(typeof cssDeclaration.getPropertyValue('--rainbow-BgColor'), cssDeclaration.getPropertyValue('--rainbow-BgColor'))
 
-let targetLen;
-// dataset https://www.youtube.com/watch?v=On_WyUB1gOk 
+// dataset https://www.youtube.com/watch?v=On_WyUB1gOk
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues 
+let num = 255;  
+// let computedStyle, computedStyleValue;
+const tenPercent = num / 10;
+function decrementNum(computedStyle) {
+  // ++num; // works
+  // num += 100; // works
+  num -= tenPercent;
+  console.log('decrementNum in event listener num', num)
+}
+function logComputedStyle(value) {
+    decrementNum();
+    console.log(value)
+}
+
 function setRandomBg(e) {
+  let targetStyleLen; // doesn't appear to have to be global 
+
   const [red, green, blue] = makeRandomColors();
-  // console.log(typeof [red, green, blue], [red, green, blue], Array.isArray([red, green, blue])); // array
-  // console.log('red', red)
-  // const rgbRed = red;
-  // console.log('rgbRed', rgbRed)
+  targetStyleLen = e.target.style.length;
 
-  targetLen = e.target.style.length;
-  // console.log('targetLen inside function', targetLen) // 0 but gets thrown away?
-
-  if (targetLen === 0) {
+  if (targetStyleLen === 0) {
     e.target.style.setProperty('--rainbow-BgColor', `rgb(${red}, ${green}, ${blue})`);
-
-    computedStyle = window.getComputedStyle(e.target);
-    // console.log(computedStyle.getPropertyValue('background-color'))
-    computedStyleValue = computedStyle.getPropertyValue('background-color');
-    console.log('first mouseover', computedStyleValue)
-
-
-
-    // const cssDeclaration = document.styleSheets[4].cssRules[0].style;
-    // const bgColor = cssDeclaration.getPropertyValue('--rainbow-BgColor');
-    // console.log(e.target.style)
-    // console.log(bgColor)
-
-    // console.log(red)
   }
-  if (targetLen === 1) {
-    console.log('second mouseover', computedStyleValue)
+  if (targetStyleLen === 1) {
+    computedStyle = window.getComputedStyle(e.target); // has to be window
+    computedStyleValue = computedStyle.getPropertyValue('background-color');
+    // console.log('mouseover', computedStyleValue)
 
-    // console.log('red', red)
-    // console.log('rgbRed', rgbRed)
-    // console.log(rgbRed)
-    // console.log('targetLen is', targetLen)
-    e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
+    // console.log('second mouseover', computedStyleValue, typeof computedStyleValue)
+    // console.log(computedStyleValue.length) // 16
+    // e.target.style.cssText = 'background-color: rgb(255,0,0)';
+    e.target.style.cssText = `background-color: ${computedStyleValue}` 
+    // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
+
+    logComputedStyle(computedStyleValue);
+
+    // reduce a number by 10% until it's zero
+    // https://stackoverflow.com/questions/5496576/increase-and-decrease-a-variable-until-a-number-is-reached-in-javascript
+    num2 = 1;
   }
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
 
-sketchContainerWrap.addEventListener('mouseover', (e) => {
-  // [red, green, blue] = makeRandomColors();
-
-  // console.log(red)
-
-  if (e.target.style.length === 1) {
-    // console.log('target len:', targetLength)
-    // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
-
-    // subtract .10 from red, green, blue and reset the style property color
-    // e.target.style.setProperty('--rainbow-Bg-color', `rgb(0, 0, 0)`)
-  }
-})
+const mainTitle = document.querySelector('.main-title');
+let num2 = 0;
+mainTitle.addEventListener('mouseover', (e) => {
+  ++num2;
+  console.log('num2:', num2)
+});
