@@ -102,18 +102,42 @@ const makeRandomColors = () => {
 
 // dataset https://www.youtube.com/watch?v=On_WyUB1gOk
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues 
-let num = 255;  
+function getRGB(value, num) {
+  console.log('this is the ', value + ' from getRGB function value')
+  // return value = 255; 
+  // num = 255;
+  // console.log(num); // works
+  // return num;
+}
+let calcTenPercent = (value) => {
+  tenPercent = value / 10;
+  console.log('calcTenPercent', tenPercent) // NaN 
+  // return tenPercent;
+  // return `${num} -= ${tenPercent}`; // guessing does not work CORRECT
+  // return `${num -= tenPercent}`; // 
+}
+// let num = 255;  
+// const tenPercent = num / 10;
+function decrementNum(num, tenPercent, value, getRGB) {
+  // console.log('getRGB from inside decrementNum', getRGB(value));
 // let computedStyle, computedStyleValue;
-const tenPercent = num / 10;
-function decrementNum(computedStyle) {
   // ++num; // works
   // num += 100; // works
-  num -= tenPercent;
-  console.log('decrementNum in event listener num', num)
+  // console.log(calcTenPercent(255, tenPercent)); // returns 25.5 CORRECT !!
+  // console.log('calcTenPercent function', calcTenPercent(value)); // NaN
+  // num -= tenPercent;
+  // console.log('decrementNum in event listener num', num) // NaN
+  // calcTenPercent(value)
+  console.log('decrementNum ', value) // undefined
+  // console.log(getRGB(value));
+  // return value -= tenPercent;
 }
-function logComputedStyle(value) {
-    decrementNum();
-    console.log(value)
+function logComputedStyle(value, num) {
+  getRGB(value) 
+  calcTenPercent(value)
+  decrementNum(value);
+  // console.log(typeof value, value) 
+  // decrementNum(getRGB, value);
 }
 
 function setRandomBg(e) {
@@ -144,10 +168,3 @@ function setRandomBg(e) {
   }
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
-
-const mainTitle = document.querySelector('.main-title');
-let num2 = 0;
-mainTitle.addEventListener('mouseover', (e) => {
-  ++num2;
-  console.log('num2:', num2)
-});
