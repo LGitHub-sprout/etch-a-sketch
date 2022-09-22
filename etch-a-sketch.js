@@ -104,11 +104,17 @@ const makeRandomColors = () => {
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues
 
 
-function logComputedStyleVal(value, anotherVar) {
-  console.log('logComputedStyleVal: ', value)
+function logComputedStyleVal(value, anotherVar) { // can use same name or param 
+  console.log('logComputedStyleVal VALUE: ', value)
+  
+  newValue = anotherVar.slice(0, 1) // remove every letter except 'P'
+  newNum = value.slice(4, 7)
 
-  newValue = '#95A386';
-  console.log('logComputedStyleVal newValue:', value, anotherVar)
+  // newValue = '#95A386';
+  // console.log('logComputedStyleVal newValue:', newValue)
+  console.log('logComputedStyleVal anotherVar', anotherVar)
+  console.log('logComputedStyleVal SLICED value:', newValue) 
+  console.log('logComputedStyleVal newNum', newNum)
 }
 
 function setRandomBg(e) {
@@ -124,8 +130,8 @@ function setRandomBg(e) {
     const computedStyle = window.getComputedStyle(e.target); // window, not document  
     const computedStyleValue = computedStyle.getPropertyValue('background-color');
     // console.log('mouseover', computedStyleValue)
-    
-    const anotherVar = 'Poop';
+
+    let anotherVar = 'Poop';
     logComputedStyleVal(computedStyleValue, anotherVar);
 
     // console.log(computedStyleValue.length) // 16
@@ -133,7 +139,9 @@ function setRandomBg(e) {
     e.target.style.cssText = `background-color: ${newValue}` 
     // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
 
-    console.log('log EVENT newValue: ', newValue)
+    console.log('log MOUSEOVER EVENT newValue: ', newValue) // works: slice anotherVar & log 'P'
+    console.log('log MOUSEOVER EVENT newNum: ', newNum, newNum.length)
+    // console.log('logComputedStyleVal original/sliced value:', anotherVar) // sometimes works, sometimes not
 
     // reduce a number by 10% until it's zero
     // https://stackoverflow.com/questions/5496576/increase-and-decrease-a-variable-until-a-number-is-reached-in-javascript
