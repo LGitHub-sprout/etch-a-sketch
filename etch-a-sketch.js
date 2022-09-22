@@ -101,43 +101,14 @@ const makeRandomColors = () => {
 // console.log(typeof cssDeclaration.getPropertyValue('--rainbow-BgColor'), cssDeclaration.getPropertyValue('--rainbow-BgColor'))
 
 // dataset https://www.youtube.com/watch?v=On_WyUB1gOk
-// https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues 
-function getRGB(value, num) {
-  console.log('this is the ', value + ' from getRGB function value')
-  // return value = 255; 
-  // num = 255;
-  // console.log(num); // works
-  // return num;
-}
-let calcTenPercent = (value) => {
-  tenPercent = value / 10;
-  console.log('calcTenPercent', tenPercent) // NaN 
-  // return tenPercent;
-  // return `${num} -= ${tenPercent}`; // guessing does not work CORRECT
-  // return `${num -= tenPercent}`; // 
-}
-// let num = 255;  
-// const tenPercent = num / 10;
-function decrementNum(num, tenPercent, value, getRGB) {
-  // console.log('getRGB from inside decrementNum', getRGB(value));
-// let computedStyle, computedStyleValue;
-  // ++num; // works
-  // num += 100; // works
-  // console.log(calcTenPercent(255, tenPercent)); // returns 25.5 CORRECT !!
-  // console.log('calcTenPercent function', calcTenPercent(value)); // NaN
-  // num -= tenPercent;
-  // console.log('decrementNum in event listener num', num) // NaN
-  // calcTenPercent(value)
-  console.log('decrementNum ', value) // undefined
-  // console.log(getRGB(value));
-  // return value -= tenPercent;
-}
-function logComputedStyle(value, num) {
-  getRGB(value) 
-  calcTenPercent(value)
-  decrementNum(value);
-  // console.log(typeof value, value) 
-  // decrementNum(getRGB, value);
+// https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues
+
+
+function logComputedStyleVal(value, anotherVar) {
+  console.log('logComputedStyleVal: ', value)
+
+  newValue = '#95A386';
+  console.log('logComputedStyleVal newValue:', value, anotherVar)
 }
 
 function setRandomBg(e) {
@@ -150,21 +121,22 @@ function setRandomBg(e) {
     e.target.style.setProperty('--rainbow-BgColor', `rgb(${red}, ${green}, ${blue})`);
   }
   if (targetStyleLen === 1) {
-    computedStyle = window.getComputedStyle(e.target); // has to be window
-    computedStyleValue = computedStyle.getPropertyValue('background-color');
+    const computedStyle = window.getComputedStyle(e.target); // window, not document  
+    const computedStyleValue = computedStyle.getPropertyValue('background-color');
     // console.log('mouseover', computedStyleValue)
+    
+    const anotherVar = 'Poop';
+    logComputedStyleVal(computedStyleValue, anotherVar);
 
-    // console.log('second mouseover', computedStyleValue, typeof computedStyleValue)
     // console.log(computedStyleValue.length) // 16
     // e.target.style.cssText = 'background-color: rgb(255,0,0)';
-    e.target.style.cssText = `background-color: ${computedStyleValue}` 
+    e.target.style.cssText = `background-color: ${newValue}` 
     // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
 
-    logComputedStyle(computedStyleValue);
+    console.log('log EVENT newValue: ', newValue)
 
     // reduce a number by 10% until it's zero
     // https://stackoverflow.com/questions/5496576/increase-and-decrease-a-variable-until-a-number-is-reached-in-javascript
-    num2 = 1;
   }
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
