@@ -37,7 +37,6 @@ const assembleGrid = (defaultGrid) => {
       for (let s = 0; s < defaultGrid; s++) {
         createElements('div', 'grid-square', gridRow).classList.add('data-');
         gridRow.firstElementChild.classList.add('data')
-
       }
     }
   } else {
@@ -47,7 +46,6 @@ const assembleGrid = (defaultGrid) => {
       for (let s = 0; s < defaultGrid; s++) {
         createElements('div', 'grid-square', userRow).classList.add('data-');
         userRow.firstElementChild.classList.add('data')
-
       }
     }
   } 
@@ -121,10 +119,9 @@ function decrement(numToPercent) {
 
 function setRandomBg(e) {
   let targetStyleLen; // doesn't appear to have to be global 
-
   const [red, green, blue] = makeRandomColors();
   targetStyleLen = e.target.style.length;
-
+  
   if (targetStyleLen === 0) {
     e.target.style.setProperty('--rainbow-BgColor', `rgb(${red}, ${green}, ${blue})`);
   }
@@ -137,14 +134,16 @@ function setRandomBg(e) {
     decrement(newNum)
     // console.log('decrement returns:', typeof decrement(newNum), decrement(newNum)); // return result to make this work
     console.log('decrement tenPercent', tenPercent);
+    // console.log('newNum minus 10%', newNum -= tenPercent)
 
     // e.target.style.cssText = 'background-color: rgb(255,0,0)';
-    e.target.style.cssText = `background-color: ${newNum -= tenPercent}`; // doesn't work 
-    e.target.style.cssText = `background-color: ${newNum}`; // doesn't work     
-    e.target.style.cssText = `background-color: #95A386`; // works but not what I want obv 
+    // e.target.style.cssText = `background-color: rgb(${newNum -= tenPercent, newNum -= tenPercent, newNum -= tenPercent})`; // doesn't work 
+    // e.target.style.cssText = `background-color: rgb(${newNum -= tenPercent, newNum -= tenPercent, newNum -= tenPercent})`; // doesn't work     
+    // e.target.style.cssText = `background-color: #95A386`; // works but not what I want obv 
     // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
+    e.target.style.setProperty('--rainbow-BgColor', `rgb(${newNum -= tenPercent}, ${newNum -= tenPercent}, ${newNum -= tenPercent})`);
 
-    console.log('log MOUSEOVER EVENT newNum: ', newNum)
+    // console.log('log MOUSEOVER EVENT newNum: ', newNum)
     // console.log('logComputedStyleVal original/sliced value:', anotherVar) // sometimes works, sometimes not
 
     // reduce a number by 10% until it's zero
