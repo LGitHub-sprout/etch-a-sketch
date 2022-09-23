@@ -107,14 +107,16 @@ const makeRandomColors = () => {
 function logComputedStyleVal(value, anotherVar) { // can use same name or param 
   console.log('logComputedStyleVal VALUE: ', value)
   
-  newValue = anotherVar.slice(0, 1) // remove every letter except 'P'
   newNum = value.slice(4, 7)
-
+  
   // newValue = '#95A386';
-  // console.log('logComputedStyleVal newValue:', newValue)
-  console.log('logComputedStyleVal anotherVar', anotherVar)
-  console.log('logComputedStyleVal SLICED value:', newValue) 
   console.log('logComputedStyleVal newNum', newNum)
+}
+function decrement(numToPercent) {
+  tenPercent = numToPercent / 10;
+  numToPercent -= tenPercent;
+  // result = numToPercent -= tenPercent;
+  // return result;
 }
 
 function setRandomBg(e) {
@@ -131,16 +133,18 @@ function setRandomBg(e) {
     const computedStyleValue = computedStyle.getPropertyValue('background-color');
     // console.log('mouseover', computedStyleValue)
 
-    let anotherVar = 'Poop';
-    logComputedStyleVal(computedStyleValue, anotherVar);
+    logComputedStyleVal(computedStyleValue);
+    decrement(newNum)
+    // console.log('decrement returns:', typeof decrement(newNum), decrement(newNum)); // return result to make this work
+    console.log('decrement tenPercent', tenPercent);
 
-    // console.log(computedStyleValue.length) // 16
     // e.target.style.cssText = 'background-color: rgb(255,0,0)';
-    e.target.style.cssText = `background-color: ${newValue}` 
+    e.target.style.cssText = `background-color: ${newNum -= tenPercent}`; // doesn't work 
+    e.target.style.cssText = `background-color: ${newNum}`; // doesn't work     
+    e.target.style.cssText = `background-color: #95A386`; // works but not what I want obv 
     // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
 
-    console.log('log MOUSEOVER EVENT newValue: ', newValue) // works: slice anotherVar & log 'P'
-    console.log('log MOUSEOVER EVENT newNum: ', newNum, newNum.length)
+    console.log('log MOUSEOVER EVENT newNum: ', newNum)
     // console.log('logComputedStyleVal original/sliced value:', anotherVar) // sometimes works, sometimes not
 
     // reduce a number by 10% until it's zero
