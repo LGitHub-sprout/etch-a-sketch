@@ -103,16 +103,19 @@ const makeRandomColors = () => {
 
 
 function logComputedStyleVal(value, anotherVar) { // can use same name or param 
-  console.log('logComputedStyleVal VALUE: ', value)
+  console.log('logComputedStyleVal VALUE: ', value) // rgb(###, ###, ###)
+  regEx = /()\d+/g;
+  rgbValues = value.match(regEx)
+  console.log('rgbValues', rgbValues, typeof rgbValues, Array.isArray(rgbValues))
   
-  newNum = value.slice(4, 7)
+  newNum = value.slice(4, 7) 
   
   // newValue = '#95A386';
   console.log('logComputedStyleVal newNum', newNum)
 }
-function decrement(numToPercent) {
+function darkenColor(numToPercent) {
   tenPercent = numToPercent / 10;
-  numToPercent -= tenPercent;
+  // numToPercent -= tenPercent;
   // result = numToPercent -= tenPercent;
   // return result;
 }
@@ -131,9 +134,10 @@ function setRandomBg(e) {
     // console.log('mouseover', computedStyleValue)
 
     logComputedStyleVal(computedStyleValue);
-    decrement(newNum)
-    // console.log('decrement returns:', typeof decrement(newNum), decrement(newNum)); // return result to make this work
-    console.log('decrement tenPercent', tenPercent);
+    darkenColor(newNum)
+    // console.log('darkenColor returns:', typeof darkenColor(newNum), darkenColor(newNum)); // return result to make this work
+    console.log('darkenColor tenPercent', tenPercent);
+
     // console.log('newNum minus 10%', newNum -= tenPercent)
 
     // e.target.style.cssText = 'background-color: rgb(255,0,0)';
@@ -151,3 +155,17 @@ function setRandomBg(e) {
   }
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
+
+// const rgb = 'rgb(133, 118, 251)'
+// regEx = /()\d+/g;
+// const rgbArray = [...rgb.matchAll(regEx)];
+// console.log(rgbArray)
+// console.log(rgbArray[0])
+// console.log(rgbArray[0][0])
+// console.log(rgbArray[1])
+// console.log(rgbArray[1][0])
+// console.log(rgbArray[2])
+// console.log(typeof rgbArray[2][0], rgbArray[2][0])
+
+// const rgbArray2 = rgb.match(regEx)
+// console.log('rgbArray2', rgbArray2)
