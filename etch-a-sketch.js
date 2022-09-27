@@ -103,20 +103,37 @@ const makeRandomColors = () => {
 
 
 function logComputedStyleVal(value, anotherVar) { // can use same name or param 
-  console.log('logComputedStyleVal VALUE: ', value) // rgb(###, ###, ###)
+  console.log('logComputedStyleVal VALUE: ', value, typeof value) // string 
   regEx = /()\d+/g;
+  // console.log('rgbValues', rgbValues, typeof rgbValues, Array.isArray(rgbValues))
+  
+  // updatedColor = value.slice(4, 7) 
+  // console.log('logComputedStyleVal updatedColor', updatedColor)
+  
   rgbValues = value.match(regEx)
-  console.log('rgbValues', rgbValues, typeof rgbValues, Array.isArray(rgbValues))
-  
-  newNum = value.slice(4, 7) 
-  
+  rgbValues.forEach(darkenColor) 
+  // return rgbValues;
   // newValue = '#95A386';
-  console.log('logComputedStyleVal newNum', newNum)
+  darkenColor(rgbValues)
+  console.log('logComputedStyleVal() value', value, typeof Array.from(value), typeof value)
 }
-function darkenColor(numToPercent) {
-  tenPercent = numToPercent / 10;
-  // numToPercent -= tenPercent;
-  // result = numToPercent -= tenPercent;
+function darkenColor(color) { 
+
+  // Loop over array doing expression for ea item.
+  // console.log('first instance of color in darkenColor', color, typeof color) // string
+  color = parseInt(color, 10);
+  tenPercent = color / 10;
+  console.log('darkenColor tenPercent', tenPercent, typeof tenPercent) // number
+  
+  console.log('darkenColor() color', color, typeof color) // string 
+  console.log('rgbValues from darkenColor', rgbValues, typeof rgbValues, Array.isArray(rgbValues))
+  // return color -= tenPercent;
+  
+  // color is a string 'rgb(###, ###, ##) 
+  // console.log('color from darkenColor', color, typeof color, Array.isArray(color))
+  // color -= tenPercent;
+  // result = color -= tenPercent;
+  // console.log('result', result)
   // return result;
 }
 
@@ -134,20 +151,24 @@ function setRandomBg(e) {
     // console.log('mouseover', computedStyleValue)
 
     logComputedStyleVal(computedStyleValue);
-    darkenColor(newNum)
-    // console.log('darkenColor returns:', typeof darkenColor(newNum), darkenColor(newNum)); // return result to make this work
-    console.log('darkenColor tenPercent', tenPercent);
+    // darkenColor(updatedColor)
+    // console.log('darkenColor returns:', typeof darkenColor(updatedColor), darkenColor(updatedColor)); // return result to make this work
+    console.log('event tenPercent', tenPercent);
+    console.log('event rgbValues', rgbValues)
+    console.log('event rgbValues[0]', rgbValues[0], typeof rgbValues[0])
+    // console.log('event darkenColor() color', color, typeof color) // string   
 
-    // console.log('newNum minus 10%', newNum -= tenPercent)
+    // console.log('updatedColor minus 10%', updatedColor -= tenPercent)
 
     // e.target.style.cssText = 'background-color: rgb(255,0,0)';
-    // e.target.style.cssText = `background-color: rgb(${newNum -= tenPercent, newNum -= tenPercent, newNum -= tenPercent})`; // doesn't work 
-    // e.target.style.cssText = `background-color: rgb(${newNum -= tenPercent, newNum -= tenPercent, newNum -= tenPercent})`; // doesn't work     
+    // e.target.style.cssText = `background-color: rgb(${updatedColor -= tenPercent, updatedColor -= tenPercent, updatedColor -= tenPercent})`; // doesn't work 
+    // e.target.style.cssText = `background-color: rgb(${updatedColor -= tenPercent, updatedColor -= tenPercent, updatedColor -= tenPercent})`; // doesn't work     
     // e.target.style.cssText = `background-color: #95A386`; // works but not what I want obv 
     // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
-    e.target.style.setProperty('--rainbow-BgColor', `rgb(${newNum -= tenPercent}, ${newNum -= tenPercent}, ${newNum -= tenPercent})`);
+    e.target.style.setProperty('--rainbow-BgColor', `rgb(${rgbValues[0] -= tenPercent}, ${rgbValues[1] -= tenPercent}, ${rgbValues[2] -= tenPercent})`);
 
-    // console.log('log MOUSEOVER EVENT newNum: ', newNum)
+    console.log('event RGB val - 10%', rgbValues[0] -= tenPercent, 'color', value)
+    // console.log('log MOUSEOVER EVENT updatedColor: ', updatedColor)
     // console.log('logComputedStyleVal original/sliced value:', anotherVar) // sometimes works, sometimes not
 
     // reduce a number by 10% until it's zero
@@ -155,17 +176,3 @@ function setRandomBg(e) {
   }
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
-
-// const rgb = 'rgb(133, 118, 251)'
-// regEx = /()\d+/g;
-// const rgbArray = [...rgb.matchAll(regEx)];
-// console.log(rgbArray)
-// console.log(rgbArray[0])
-// console.log(rgbArray[0][0])
-// console.log(rgbArray[1])
-// console.log(rgbArray[1][0])
-// console.log(rgbArray[2])
-// console.log(typeof rgbArray[2][0], rgbArray[2][0])
-
-// const rgbArray2 = rgb.match(regEx)
-// console.log('rgbArray2', rgbArray2)
