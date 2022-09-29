@@ -96,18 +96,21 @@ const makeRandomColors = () => {
 // dataset https://www.youtube.com/watch?v=On_WyUB1gOk
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues
 
-function getBgRGB(value) { 
+function getBgRGB(value, tenPercent) { 
   // value is a string 'rgb('###', '###', '###')'
   regEx = /()\d+/g;
   rgbValues = value.match(regEx) // Returns an array of strings
 
+  for (let i = 0; i < rgbValues.length; i++) {
+    tenPercent = rgbValues[i] / 10; 
+    console.log('getBgRGB tenPercent', tenPercent)
+  }
+  // return tenPercent; 
+
   console.log('getBgRGB value', value)
   console.log('getBgRGB rgbValues', rgbValues)
 
-
   // rgbValues.forEach(darkenColor, value) // this, and darkenColor(), is the problem likely.
-
-  // console.log('rgbValues', rgbValues, typeof rgbValues, 'object array?', Array.isArray(rgbValues)) // An array of strings 
 }
 const darkenColor = (color) => {
   color = parseInt(color, 10); // color to base10 number
@@ -140,7 +143,6 @@ const darkenColor = (color) => {
 //   // return result;
 // }
 
-
 function setRandomBg(e, firstMouseover) {
   const [red, green, blue] = makeRandomColors();
   targetStyleLen = e.target.style.length;
@@ -153,29 +155,18 @@ function setRandomBg(e, firstMouseover) {
     const computedStyleValue = computedStyle.getPropertyValue('background-color');
 
     getBgRGB(computedStyleValue);
+    
     console.log('event computed value', computedStyleValue)
+    // console.log(tenPercent) // not defined 
 
-    let [red, green, blue] = darkenColor(rgbValues)
-    tenPercentGreen = rgbValues[1] / 10;
-    tenPercentBlue = rgbValues[2] / 10;
-    console.log('event red, green, blue:', red, green, blue);
-    console.log('event tenPercents:', tenPercentRed, tenPercentGreen, tenPercentBlue)
+    // let [red, green, blue] = darkenColor(rgbValues)
+    // tenPercentRed = rgbValues[0] / 10;
+    // tenPercentGreen = rgbValues[1] / 10;
+    // tenPercentBlue = rgbValues[2] / 10;
+    // console.log('event red, green, blue:', red, green, blue);
+    // console.log('event tenPercents:', tenPercentRed, tenPercentGreen, tenPercentBlue)
 
-    // console.log('event tenPercent', tenPercent);
-    // console.log('event rgbValues', rgbValues)
-    // console.log('event rgbValues[0]', rgbValues[0], typeof rgbValues[0])
-
-    // darkenColor(rgbValues)
-    // console.log('darkenColor returns:', typeof darkenColor(updatedColor), darkenColor(updatedColor)); // return result to make this work
-    // console.log('event darkenColor() color', color, typeof color) // string   
-    // console.log('updatedColor minus 10%', updatedColor -= tenPercent)
-
-    // e.target.style.cssText = 'background-color: rgb(255,0,0)';
-    // e.target.style.cssText = `background-color: rgb(${updatedColor -= tenPercent, updatedColor -= tenPercent, updatedColor -= tenPercent})`; // doesn't work 
-    // e.target.style.cssText = `background-color: rgb(${updatedColor -= tenPercent, updatedColor -= tenPercent, updatedColor -= tenPercent})`; // doesn't work     
-    // e.target.style.cssText = `background-color: #95A386`; // works but not what I want obv 
-    // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
-    e.target.style.setProperty('--rainbow-BgColor', `rgb(${red -= tenPercentRed}, ${green -= tenPercentGreen}, ${blue -= tenPercentBlue})`);
+    e.target.style.setProperty('--rainbow-BgColor', `rgb(${red -= tenPercent}, ${green -= tenPercent}, ${blue -= tenPercent})`);
 
     // console.log('event rgbValues[0] - 10%', rgbValues[0] -= tenPercent)
     // console.log('log MOUSEOVER EVENT updatedColor: ', updatedColor)
