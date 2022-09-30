@@ -82,13 +82,14 @@ const calcRandomNum = (min, max) => // {
   () => {
     return Math.floor(Math.random() * (max - min));
   };
-  getRandomNum = calcRandomNum(0, 255);
+  let getRandomNum = calcRandomNum(0, 255);
   
 const makeRandomColors = () => {
   let arr = [...Array(3)].map(getRandomNum);
 
   return arr;
 }
+
 // pattern, replacement
 // const num = 222;
 // const pattern = ! Number.isNaN(num);
@@ -96,28 +97,24 @@ const makeRandomColors = () => {
 // dataset https://www.youtube.com/watch?v=On_WyUB1gOk
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues
 
-function getBgRGB(value, tenPercent) { 
-  // value is a string 'rgb('###', '###', '###')'
+function getBgRGB(value) { 
   regEx = /()\d+/g;
   rgbValues = value.match(regEx) // Returns an array of strings
-
-  for (let i = 0; i < rgbValues.length; i++) {
-    tenPercent = rgbValues[i] / 10; 
-    console.log('getBgRGB tenPercent', tenPercent)
-  }
-  // return tenPercent; 
 
   console.log('getBgRGB value', value)
   console.log('getBgRGB rgbValues', rgbValues)
 
+
   // rgbValues.forEach(darkenColor, value) // this, and darkenColor(), is the problem likely.
+
+  // console.log('rgbValues', rgbValues, typeof rgbValues, 'object array?', Array.isArray(rgbValues)) // An array of strings 
 }
 const darkenColor = (color) => {
-  color = parseInt(color, 10); // color to base10 number
+  // color = parseInt(color, 10); // color to base10 number
   
-  tenPercentRed = color / 10; // number 
+  // tenPercentRed = color / 10; // number 
   // tenPercentGreen = color / 10;
-  tenPercentBlue = color / 10;
+  // tenPercentBlue = color / 10;
 
   // tenPercentGreen = rgbValues[1] / 10;
   // color -= tenPercent;
@@ -143,7 +140,7 @@ const darkenColor = (color) => {
 //   // return result;
 // }
 
-function setRandomBg(e, firstMouseover) {
+function setRandomBg(e) {
   const [red, green, blue] = makeRandomColors();
   targetStyleLen = e.target.style.length;
 
@@ -154,19 +151,38 @@ function setRandomBg(e, firstMouseover) {
     const computedStyle = window.getComputedStyle(e.target); // window, not document  
     const computedStyleValue = computedStyle.getPropertyValue('background-color');
 
+    const [tenRed, tenGreen, tenBlue] = makeRandomColors();
+    console.log('tenRed, tenGreen, tenBlue', tenRed, tenGreen, tenBlue)
+
     getBgRGB(computedStyleValue);
-    
     console.log('event computed value', computedStyleValue)
-    // console.log(tenPercent) // not defined 
 
-    // let [red, green, blue] = darkenColor(rgbValues)
-    // tenPercentRed = rgbValues[0] / 10;
-    // tenPercentGreen = rgbValues[1] / 10;
-    // tenPercentBlue = rgbValues[2] / 10;
-    // console.log('event red, green, blue:', red, green, blue);
-    // console.log('event tenPercents:', tenPercentRed, tenPercentGreen, tenPercentBlue)
+    let [redNew, greenNew, blueNew] = darkenColor(rgbValues)
+    console.log('mouseover redNew', redNew, typeof redNew)
+    const tenPercentRed = rgbValues[0] / 10;
+    const tenPercentGreen = rgbValues[1] / 10;
+    const tenPercentBlue = rgbValues[2] / 10;
+    console.log('mouseover redNew', redNew, typeof redNew)
 
-    e.target.style.setProperty('--rainbow-BgColor', `rgb(${red -= tenPercent}, ${green -= tenPercent}, ${blue -= tenPercent})`);
+    console.log('event red, green, blue:', red, green, blue);
+    console.log('event tenPercents:', tenPercentRed, tenPercentGreen, tenPercentBlue)
+
+
+    // console.log('event tenPercent', tenPercent);
+    // console.log('event rgbValues', rgbValues)
+    // console.log('event rgbValues[0]', rgbValues[0], typeof rgbValues[0])
+
+    // darkenColor(rgbValues)
+    // console.log('darkenColor returns:', typeof darkenColor(updatedColor), darkenColor(updatedColor)); // return result to make this work
+    // console.log('event darkenColor() color', color, typeof color) // string   
+    // console.log('updatedColor minus 10%', updatedColor -= tenPercent)
+
+    // e.target.style.cssText = 'background-color: rgb(255,0,0)';
+    // e.target.style.cssText = `background-color: rgb(${updatedColor -= tenPercent, updatedColor -= tenPercent, updatedColor -= tenPercent})`; // doesn't work 
+    // e.target.style.cssText = `background-color: rgb(${updatedColor -= tenPercent, updatedColor -= tenPercent, updatedColor -= tenPercent})`; // doesn't work     
+    // e.target.style.cssText = `background-color: #95A386`; // works but not what I want obv 
+    // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
+    e.target.style.setProperty('--rainbow-BgColor', `rgb(${redNew -= tenPercentRed}, ${greenNew -= tenPercentGreen}, ${blueNew -= tenPercentBlue})`);
 
     // console.log('event rgbValues[0] - 10%', rgbValues[0] -= tenPercent)
     // console.log('log MOUSEOVER EVENT updatedColor: ', updatedColor)
