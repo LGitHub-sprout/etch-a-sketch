@@ -5,7 +5,7 @@ let userGrid;
 
 const getUserGrid = () => {
   return prompt('Enter a grid size 100 or LOWER.');
-}
+};
 
 const getGridControls = function () {
   userGrid = getUserGrid();
@@ -21,14 +21,13 @@ const getGridControls = function () {
     // https://stackoverflow.com/questions/10232366/how-to-check-if-a-variable-is-null-or-empty-string-or-all-whitespace-in-javascri
   } else if (userGrid.match(/^ *$/) !== null) {
     alert('No spaces allowed.');
-    return
+    return;
   }
   deleteGrid();
   assembleGrid(userGrid);
-}
+};
 gridSizeBtn.addEventListener('click', getGridControls);
 
-// https://codepen.io/alecnissen/pen/oNqKBEE?editors=0010
 const assembleGrid = (defaultGrid) => {
   if (userGrid === undefined) {
     for (let r = 0; r < defaultGrid; r++) {
@@ -36,7 +35,7 @@ const assembleGrid = (defaultGrid) => {
       
       for (let s = 0; s < defaultGrid; s++) {
         createElements('div', 'grid-square', gridRow).classList.add('data-');
-        gridRow.firstElementChild.classList.add('data')
+        gridRow.firstElementChild.classList.add('data');
       }
     }
   } else {
@@ -45,15 +44,15 @@ const assembleGrid = (defaultGrid) => {
       
       for (let s = 0; s < defaultGrid; s++) {
         createElements('div', 'grid-square', userRow).classList.add('data-');
-        userRow.firstElementChild.classList.add('data')
+        userRow.firstElementChild.classList.add('data');
       }
     }
-  } 
-}
+  }
+};
 assembleGrid(16);
 
 // I'm not opposed to func expressions. Sometimes hoisting better organizes the code.
-// createElements() posted by Learner on TOP whom I forgot to cite.
+// createElements() posted by Learner on TOP whose name I forgot to get.
 function createElements(element, className, appendTo) {
   const el = document.createElement(element);
   el.classList.add(className);
@@ -85,64 +84,38 @@ const calcRandomNum = (min, max) => // {
   let getRandomNum = calcRandomNum(0, 255);
   
 const makeRandomColors = () => {
+  // map() the random generated number from calcRandomNum
+  // into the arr variable (spread an array of 3 digits)
   let arr = [...Array(3)].map(getRandomNum);
 
   return arr;
-}
+};
 
-// pattern, replacement
-// const num = 222;
-// const pattern = ! Number.isNaN(num);
-// console.log('true or false', pattern)
-// dataset https://www.youtube.com/watch?v=On_WyUB1gOk
-// https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#issues
-
+// Tried and tried for a better way to do this. Couldn't get it.
 function getBgRGB(value) { 
-  regEx = /()\d+/g;
-  rgbValues = value.match(regEx) // Returns an array of strings
+  const regEx = /()\d+/g;
+  rgbValues = value.match(regEx); // Returns an array of strings
 
-  console.log('getBgRGB value', value)
-  console.log('getBgRGB rgbValues', rgbValues)
-
-
-  // rgbValues.forEach(darkenColor, value) // this, and darkenColor(), is the problem likely.
-
-  // console.log('rgbValues', rgbValues, typeof rgbValues, 'object array?', Array.isArray(rgbValues)) // An array of strings 
+  // console.log('getBgRGB value', value, typeof value)
+  // console.log('getBgRGB rgbValues', rgbValues)
 }
-const darkenColor = (color) => {
-  // color = parseInt(color, 10); // color to base10 number
-  
-  // tenPercentRed = color / 10; // number 
-  // tenPercentGreen = color / 10;
-  // tenPercentBlue = color / 10;
-
-  // tenPercentGreen = rgbValues[1] / 10;
-  // color -= tenPercent;
-  // console.log('rgbValues from darkenColor func ex', rgbValues)
+const darkenColor = () => {
   return rgbValues;
-} 
-// function darkenColor(color) {
-//   // Loop over array doing expression for ea item.
-//   color = parseInt(color, 10); // color to base10 number
-//   tenPercent = color / 10; // number
-//   color -= tenPercent;
-  
-//   console.log('darkenColor tenPercent', tenPercent, typeof tenPercent) // number
-//   console.log('darkenColor() color', color, typeof color) // Now it's a number
-//   console.log('rgbValues from darkenColor', rgbValues, typeof rgbValues, Array.isArray(rgbValues))
-//   // return color -= tenPercent;
-  
-//   // color is a string 'rgb(###, ###, ##)
-//   // console.log('color from darkenColor', color, typeof color, Array.isArray(color))
-//   // color -= tenPercent;
-//   // result = color -= tenPercent;
-//   // console.log('result', result)
-//   // return result;
-// }
+}; 
+// Maybe put this inside getBgRGB()? IDK
+// const divideByTen = (value) =>
+//   () => {
+//     return value / 10;
+// };
+// const tenPercent = divideByTen(200);
+// const makePercentage = () => {
+//   let arr = [...Array(3)].map(tenPercent);
+//   return arr;
+// };
 
 function setRandomBg(e) {
   const [red, green, blue] = makeRandomColors();
-  targetStyleLen = e.target.style.length;
+  const targetStyleLen = e.target.style.length;
 
   if (targetStyleLen === 0) {
     e.target.style.setProperty('--rainbow-BgColor', `rgb(${red}, ${green}, ${blue})`);
@@ -151,45 +124,24 @@ function setRandomBg(e) {
     const computedStyle = window.getComputedStyle(e.target); // window, not document  
     const computedStyleValue = computedStyle.getPropertyValue('background-color');
 
-    const [tenRed, tenGreen, tenBlue] = makeRandomColors();
-    console.log('tenRed, tenGreen, tenBlue', tenRed, tenGreen, tenBlue)
-
     getBgRGB(computedStyleValue);
-    console.log('event computed value', computedStyleValue)
+    // console.log('event computed value', computedStyleValue);
 
+    // https://stackoverflow.com/questions/5496576/increase-and-decrease-a-variable-until-a-number-is-reached-in-javascript
     let [redNew, greenNew, blueNew] = darkenColor(rgbValues)
-    console.log('mouseover redNew', redNew, typeof redNew)
+    // console.log('mouseover redNew', redNew, typeof redNew);
     const tenPercentRed = rgbValues[0] / 10;
     const tenPercentGreen = rgbValues[1] / 10;
     const tenPercentBlue = rgbValues[2] / 10;
-    console.log('mouseover redNew', redNew, typeof redNew)
+    
+    // console.log('event tenPercents:', tenPercentRed, tenPercentGreen, tenPercentBlue);
 
-    console.log('event red, green, blue:', red, green, blue);
-    console.log('event tenPercents:', tenPercentRed, tenPercentGreen, tenPercentBlue)
-
-
-    // console.log('event tenPercent', tenPercent);
-    // console.log('event rgbValues', rgbValues)
-    // console.log('event rgbValues[0]', rgbValues[0], typeof rgbValues[0])
-
-    // darkenColor(rgbValues)
-    // console.log('darkenColor returns:', typeof darkenColor(updatedColor), darkenColor(updatedColor)); // return result to make this work
-    // console.log('event darkenColor() color', color, typeof color) // string   
-    // console.log('updatedColor minus 10%', updatedColor -= tenPercent)
-
-    // e.target.style.cssText = 'background-color: rgb(255,0,0)';
-    // e.target.style.cssText = `background-color: rgb(${updatedColor -= tenPercent, updatedColor -= tenPercent, updatedColor -= tenPercent})`; // doesn't work 
-    // e.target.style.cssText = `background-color: rgb(${updatedColor -= tenPercent, updatedColor -= tenPercent, updatedColor -= tenPercent})`; // doesn't work     
-    // e.target.style.cssText = `background-color: #95A386`; // works but not what I want obv 
-    // e.target.style.setProperty('--rainbow-BgColor', `rgb(0,0,0)`);
     e.target.style.setProperty('--rainbow-BgColor', `rgb(${redNew -= tenPercentRed}, ${greenNew -= tenPercentGreen}, ${blueNew -= tenPercentBlue})`);
 
-    // console.log('event rgbValues[0] - 10%', rgbValues[0] -= tenPercent)
-    // console.log('log MOUSEOVER EVENT updatedColor: ', updatedColor)
-    // console.log('getBgRGB original/sliced value:', anotherVar) // sometimes works, sometimes not
-
-    // reduce a number by 10% until it's zero
-    // https://stackoverflow.com/questions/5496576/increase-and-decrease-a-variable-until-a-number-is-reached-in-javascript
+    // const [tenRed, tenGreen, tenBlue] = makeRandomColors();
+    // console.log('tenRed, tenGreen, tenBlue', tenRed, tenGreen, tenBlue);
+    // const [color1, color2, color3] = makePercentage(rgbValues);  
+    // console.log('event makePercentage', color1, color2, color3);
   }
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
