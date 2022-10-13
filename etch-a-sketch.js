@@ -81,8 +81,8 @@ const calcRandomNum = (min, max) => // {
   () => {
     return Math.floor(Math.random() * (max - min));
   };
-  let getRandomNum = calcRandomNum(0, 255);
-  
+let getRandomNum = calcRandomNum(0, 255); // returns the function
+
 const makeRandomColors = () => {
   // map() the random generated number from calcRandomNum
   // into the arr variable (spread an array of 3 digits)
@@ -99,19 +99,37 @@ function getBgRGB(value) {
   // console.log('getBgRGB value', value, typeof value)
   // console.log('getBgRGB rgbValues', rgbValues)
 }
+const makeDecimal = (value) => 
+// () => 
+{
+  // loop array and divide ea element by 10
+  for (let i = 0; i < value.length; i++) {
+    console.log('value', value)
+    value[i] = value[i] * .10;
+    // value[i] / 10;
+    console.log('value[i]', value[i])
+    return value[i];
+  }
+}
+// let tenPercent = makeDecimal();
+// console.log(tenPercent)
+// const decimal = tenPercent();
+// console.log('decimal', decimal)
+
+// can I just do the math inside darken and return?
 const darkenColor = () => {
-  return rgbValues;
+  const rgbValues2 = [...rgbValues]; // can spread 
+  /* 
+    New but still not working
+    console.log('rgbValues inside darken', rgbValues)
+    let arr = [...rgbValues].map(makeDecimal);
+    console.log('arr inside darken', arr)
+    return arr
+    console.log('rgbValues from darken ', rgbValues)
+    rgbValues = [0,0,0] // works
+  */
+  return rgbValues2; // need to return an array
 }; 
-// Maybe put this inside getBgRGB()? IDK
-// const divideByTen = (value) =>
-//   () => {
-//     return value / 10;
-// };
-// const tenPercent = divideByTen(200);
-// const makePercentage = () => {
-//   let arr = [...Array(3)].map(tenPercent);
-//   return arr;
-// };
 
 function setRandomBg(e) {
   const [red, green, blue] = makeRandomColors();
@@ -129,6 +147,13 @@ function setRandomBg(e) {
 
     // https://stackoverflow.com/questions/5496576/increase-and-decrease-a-variable-until-a-number-is-reached-in-javascript
     let [redNew, greenNew, blueNew] = darkenColor(rgbValues)
+
+    console.log('rgbValues from mouseover', rgbValues)
+    let [one, two, three] = darkenColor();
+    console.log('one, two, three', one, two, three)
+    // let whatever = darkenColor()
+    // console.log('whatever from mouseover', whatever)
+
     // console.log('mouseover redNew', redNew, typeof redNew);
     const tenPercentRed = rgbValues[0] / 10;
     const tenPercentGreen = rgbValues[1] / 10;
@@ -145,3 +170,10 @@ function setRandomBg(e) {
   }
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
+
+const a = [131, 162, 105].map(function (s) {
+  // console.log(s / 10);
+  return s / 10;
+});
+console.log('array a', a, 'typeof a', typeof a, 'is a an array?', Array.isArray(a))
+// Do I need or can I destructure a? No, bc a is not a function.
