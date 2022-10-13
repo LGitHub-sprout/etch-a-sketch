@@ -150,7 +150,7 @@ function setRandomBg(e) {
 
     console.log('rgbValues from mouseover', rgbValues)
     let [one, two, three] = darkenColor();
-    console.log('one, two, three', one, two, three)
+    console.log('one, two, three from destructuring darkenColor()', one, two, three)
     // let whatever = darkenColor()
     // console.log('whatever from mouseover', whatever)
 
@@ -171,9 +171,26 @@ function setRandomBg(e) {
 }
 sketchContainerWrap.addEventListener('mouseover', setRandomBg);
 
-const a = [131, 162, 105].map(function (s) {
+// Based on this S.O. and search "multiply array numbers by ten in javascript loop" 
+// https://stackoverflow.com/questions/8454977/how-do-i-multiply-each-member-of-an-array-by-a-scalar-in-javascript
+b = ['131', '162', '105'];
+console.log('array b is an array of 3 strings which are 3 numbers', b)
+const calcTenPercent = () => [...b].map(function (item) {
   // console.log(s / 10);
-  return s / 10;
+  // item = Number(item)
+  // Number(item) += 100;
+  Number(item) // Should I be sure to make it a number? 
+  console.log('spread "b" array of 3 strings into "a" func expression and log each item:', item);
+  return item / 10;
 });
-console.log('array a', a, 'typeof a', typeof a, 'is a an array?', Array.isArray(a))
-// Do I need or can I destructure a? No, bc a is not a function.
+const [tenPercentRed, tenPercentGreen, tenPercentBlue] = calcTenPercent();
+console.log('variable a destructured as percentages of ea of array b\'s original strings:', tenPercentRed, tenPercentGreen, tenPercentBlue)
+// console.log('array calcTenPercent', calcTenPercent, 'typeof calcTenPercent', typeof calcTenPercent, 'is calcTenPercent an array?', Array.isArray(calcTenPercent))
+
+// const makeRandomColors = () => {
+//   // map() the random generated number from calcRandomNum
+//   // into the arr variable (spread an array of 3 digits)
+//   let arr = [...Array(3)].map(getRandomNum);
+
+//   return arr;
+// };
